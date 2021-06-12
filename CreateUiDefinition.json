@@ -61,15 +61,11 @@
                         "name": "adminPassword",
                         "type": "Microsoft.Common.PasswordBox",
                         "label": {
-                            "password": "Password",
-                            "confirmPassword": "Confirm password"
+                            "password": "SSH password",
+                            "confirmPassword": "Confirm SSH password"
                         },
-                        "toolTip": "",
-                        "constraints": {
-                            "required": true,
-                            "regex": "^[a-zA-Z0-9]{8,}$",
-                            "validationMessage": "Password must be at least 8 characters long, contain only numbers and letters"
-                        },
+                        "toolTip": "Password must be at least 8 characters long, contain numbers, letters and special characters",
+                        "constraints": {},
                         "options": {
                               "hideConfirmation": false
                         },
