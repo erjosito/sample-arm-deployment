@@ -56,7 +56,7 @@
       },
       "cloudInitScript": {
         "type": "string",
-        "defaultValue": "#cloud-config\n\nruncmd:\n- echo 'Hello from cloud init'>~/helloworld.txt",
+        "defaultValue": "#cloud-config\n\nruncmd:\n- echo 'Hello from cloud init'>/tmp/helloworld.txt",
         "metadata": {
           "description": "Cloud init script"
         }

@@ -7,9 +7,116 @@
             "isWizard": false,
             "basics": { }
         },
-        "basics": [ ],
-        "steps": [ ],
-        "outputs": { },
+        "basics": [
+            {
+                "name": "size",
+                "label": "Size",
+                "subLabel": {
+                  "preValidation": "Choose virtual machine size",
+                  "postValidation": "Done"
+                },
+                "bladeTitle": "Size",
+                "elements": [
+                    {
+                        "name": "vmssName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "VMSS Name",
+                        "defaultValue": "yourvmss",
+                        "toolTip": "Name for the Virtual Machine Scale Set",
+                        "constraints": {},
+                        "options": {},
+                        "visible": true
+                    },
+                    {
+                        "name": "vmSize",
+                        "type": "Microsoft.Compute.SizeSelector",
+                        "label": "VM size",
+                        "toolTip": "Size of virtual machines.",
+                        "recommendedSizes": [
+                            "Standard_B1s"
+                        ],
+                        "osPlatform": "Linux",
+                        "imageReference": {
+                            "publisher": "Canonical",
+                            "offer": "UbuntuServer",
+                            "sku": "18.04-LTS"
+                        }
+                    }
+                ]
+            }
+        ],
+        "steps": [
+            {
+                "name": "Credentials",
+                "label": "VMSS credentials",
+                "elements": [
+                    {
+                        "name": "adminUsername",
+                        "type": "Microsoft.Compute.UserNameTextBox",
+                        "label": "User name",
+                        "defaultValue": "",
+                        "toolTip": "",
+                        "constraints": {
+                          "required": true,
+                          "regex": "^[a-z0-9A-Z]{1,30}$",
+                          "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
+                        },
+                        "osPlatform": "Windows",
+                        "visible": true
+                    },
+                    {
+                        "name": "adminPassword",
+                        "type": "Microsoft.Common.PasswordBox",
+                        "label": {
+                            "password": "Password",
+                            "confirmPassword": "Confirm password"
+                        },
+                        "toolTip": "",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[a-zA-Z0-9]{8,}$",
+                            "validationMessage": "Password must be at least 8 characters long, contain only numbers and letters"
+                        },
+                        "options": {
+                              "hideConfirmation": false
+                        },
+                        "visible": true
+                    }        
+                ]
+            },
+            {
+                "name": "InstanceNames",
+                "label": "VMSS instance names",
+                "elements": [
+                    {
+                        "name": "instance1name",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Name of instance1",
+                        "defaultValue": "Tom",
+                        "toolTip": "Name of instance 1",
+                        "constraints": {},
+                        "options": {},
+                        "visible": true
+                    },
+                    {
+                        "name": "instance2name",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Name of instance1",
+                        "defaultValue": "Jerry",
+                        "toolTip": "Name of instance 2",
+                        "constraints": {},
+                        "options": {},
+                        "visible": true
+                    }
+                ]
+            }
+        ],
+        "outputs": {
+            "vmssName": "[basics().vmssName]",
+            "adminUsername": "[steps('Credentials').adminUsername]",
+            "adminPasswordOrKey": "[steps('Credentials').vmPwd.password]",
+            "authenticationType": "password"
+        },
         "resourceTypes": [ ]
     }
 }
