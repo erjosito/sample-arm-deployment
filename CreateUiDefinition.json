@@ -5,7 +5,22 @@
     "parameters": {
         "config": {
             "isWizard": false,
-            "basics": { }
+            "basics": {
+                "description": "Create **Virtual Machine Scale Set**, see this [Github repo](https://github.com/erjosito/sample-arm-deployment) for more details.",
+                "subscription": {
+                    "constraints": {
+                        "validations": [
+                            {
+                                "permission": "Microsoft.Compute/virtualMachineScaleSets/write",
+                                "message": "Must have write permission for the virtual machine."
+                            }
+                        ]
+                    },
+                    "resourceProviders": [
+                        "Microsoft.Compute"
+                    ]
+                }
+            }
         },
         "basics": [
             {
@@ -113,6 +128,7 @@
         ],
         "outputs": {
             "vmssName": "[basics().vmssName]",
+            "vmSku": "[basics().vmSize]",
             "adminUsername": "[steps('Credentials').adminUsername]",
             "adminPasswordOrKey": "[steps('Credentials').vmPwd.password]",
             "authenticationType": "password"
