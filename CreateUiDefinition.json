@@ -106,8 +106,8 @@
             "adminUsername": "[steps('Credentials').adminUsername]",
             "adminPasswordOrKey": "[steps('Credentials').adminPassword]",
             "authenticationType": "password",
-            "cloudInitScript": "[concat('#cloud-config\n\nruncmd:\n- echo \"Hello ', 'Tom', ' from cloudinit\" > /tmp/helloworld.txt')]"
-        },
-        "resourceTypes": [ ]
+            "cloudInitScript": "[concat('#cloud-config__break__runcmd:__break__- if [[ \"${HOSTNAME: -1}\" == \"0\" ]]; then echo \"Hello ', steps('InstanceNames').instance1name, ' from cloudinit at ${HOSTNAME}!\" > /tmp/helloworld.txt; else echo \"Hello ', steps('InstanceNames').instance2name, '  from cloudinit at ${HOSTNAME}!\" > /tmp/helloworld.txt; fi')]"
+            },
+        "resourceTypes": []
     }
 }

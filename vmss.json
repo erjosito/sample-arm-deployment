@@ -56,13 +56,14 @@
       },
       "cloudInitScript": {
         "type": "string",
-        "defaultValue": "#cloud-config\n\nruncmd:\n- echo 'Hello from cloud init'>/tmp/helloworld.txt",
+        "defaultValue": "#cloud-config__break__runcmd:__break__- echo 'Hello from cloud init'>/tmp/helloworld.txt",
         "metadata": {
           "description": "Cloud init script"
         }
       }
     },
     "variables": {
+      "cloudInitFinal": "[replace(parameters('cloudInitScript'), '__break__', '\n')]",
       "addressPrefix": "10.0.0.0/16",
       "subnetPrefix": "10.0.0.0/24",
       "virtualNetworkName": "[concat(parameters('vmssName'), '-vnet')]",
@@ -210,7 +211,7 @@
             },
             "osProfile": {
               "computerNamePrefix": "[parameters('vmssName')]",
-              "customData": "[base64(parameters('cloudInitScript'))]",
+              "customData": "[base64(variables('cloudInitFinal'))]",
               "adminUsername": "[parameters('adminUsername')]",
               "adminPassword": "[parameters('adminPasswordOrKey')]",
               "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"

@@ -15,5 +15,5 @@ As you can see, the hyperlink goes to the Azure portal and embeds in the path bo
 VMSS cloud init file calculated dynamically as output:
 
 ```
-"cloudInitScript": "[concat('#cloud-config\n\nruncmd:\n- if [[ \"${HOSTNAME: -1}\" == \"0\" ]]; then echo \"Hello ', steps('InstanceNames').instance1Name, ' from cloudinit at ${HOSTNAME}!\" > /tmp/helloworld.txt; else echo \"Hello ', steps('InstanceNames').instance2Name, '  from cloudinit at ${HOSTNAME}!\" > /tmp/helloworld.txt; fi')]"
+"cloudInitScript": "[concat('#cloud-config\n\nruncmd:\n- if [[ \"${HOSTNAME: -1}\" == \"0\" ]]; then echo \"Hello ', steps('InstanceNames').instance1name, ' from cloudinit at ${HOSTNAME}!\" > /tmp/helloworld.txt; else echo \"Hello ', steps('InstanceNames').instance2name, '  from cloudinit at ${HOSTNAME}!\" > /tmp/helloworld.txt; fi')]"
 ```
