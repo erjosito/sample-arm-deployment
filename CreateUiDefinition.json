@@ -105,8 +105,8 @@
             }
         ],
         "outputs": {
-            "vmssName": "[steps('moreBasics').vmssName]",
-            "vmSku": "[steps('moreBasics').vmSize]",
+            "vmssName": "[steps('MoreBasics').vmssName]",
+            "vmSku": "[steps('MoreBasics').vmSize]",
             "adminUsername": "[steps('Credentials').adminUsername]",
             "adminPasswordOrKey": "[steps('Credentials').vmPwd.password]",
             "authenticationType": "password"
