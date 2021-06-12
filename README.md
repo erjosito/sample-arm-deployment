@@ -11,3 +11,9 @@ The button above is created by this markdown:
 ```[![Deploy To Azure](https://docs.microsoft.com/en-us/azure/templates/media/deploy-to-azure.svg)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ferjosito%2Fsample-arm-deployment%2Fmaster%2Fvmss.json/createUIDefinitionUri/<https%3A%2F%2Fraw.githubusercontent.com%2Ferjosito%2Fsample-arm-deployment%2Fmaster%2FCreateUiDefinition.json)```
 
 As you can see, the hyperlink goes to the Azure portal and embeds in the path both the template and the UI definition file.
+
+VMSS cloud init file calculated dynamically as output:
+
+```
+"cloudInitScript": "[concat('#cloud-config\n\nruncmd:\n- if [[ \"${HOSTNAME: -1}\" == \"0\" ]]; then echo \"Hello ', steps('InstanceNames').instance1Name, ' from cloudinit at ${HOSTNAME}!\" > /tmp/helloworld.txt; else echo \"Hello ', steps('InstanceNames').instance2Name, '  from cloudinit at ${HOSTNAME}!\" > /tmp/helloworld.txt; fi')]"
+```

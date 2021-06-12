@@ -10,7 +10,6 @@
                 "name": "MoreBasics",
                 "bladeTitle": "More basics",
                 "label": "More basics",
-
                 "elements": [
                     {
                         "name": "vmssName",
@@ -42,6 +41,7 @@
             {
                 "name": "Credentials",
                 "label": "VMSS credentials",
+                "bladeTitle": "VMSS credentials",
                 "elements": [
                     {
                         "name": "adminUsername",
