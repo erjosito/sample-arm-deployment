@@ -32,6 +32,14 @@
                 },
                 "bladeTitle": "Size",
                 "elements": [
+                ]
+            }
+        ],
+        "steps": [
+            {
+                "name": "More basics",
+                "label": "More basics",
+                "elements": [
                     {
                         "name": "vmssName",
                         "type": "Microsoft.Common.TextBox",
@@ -58,9 +66,7 @@
                         }
                     }
                 ]
-            }
-        ],
-        "steps": [
+            },
             {
                 "name": "Credentials",
                 "label": "VMSS credentials",
