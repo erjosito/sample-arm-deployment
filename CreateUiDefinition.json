@@ -2,41 +2,15 @@
     "handler": "Microsoft.Azure.CreateUIDef",
     "version": "0.1.2-preview",
     "parameters": {
-        "config": {
-            "isWizard": false,
-            "basics": {
-                "description": "Create **Virtual Machine Scale Set**, see this [Github repo](https://github.com/erjosito/sample-arm-deployment) for more details.",
-                "subscription": {
-                    "constraints": {
-                        "validations": [
-                            {
-                                "permission": "Microsoft.Compute/virtualMachineScaleSets/write",
-                                "message": "Must have write permission for the virtual machine."
-                            }
-                        ]
-                    },
-                    "resourceProviders": [
-                        "Microsoft.Compute"
-                    ]
-                }
-            }
-        },
         "basics": [
-            {
-                "name": "size",
-                "label": "Size",
-                "subLabel": {
-                  "preValidation": "Choose virtual machine size",
-                  "postValidation": "Done"
-                },
-                "bladeTitle": "Size",
-                "elements": []
-            }
+            {}
         ],
         "steps": [
             {
-                "name": "More basics",
+                "name": "MoreBasics",
+                "bladeTitle": "More basics",
                 "label": "More basics",
+
                 "elements": [
                     {
                         "name": "vmssName",
@@ -131,8 +105,8 @@
             }
         ],
         "outputs": {
-            "vmssName": "[basics().vmssName]",
-            "vmSku": "[basics().vmSize]",
+            "vmssName": "[steps('moreBasics').vmssName]",
+            "vmSku": "[steps('moreBasics').vmSize]",
             "adminUsername": "[steps('Credentials').adminUsername]",
             "adminPasswordOrKey": "[steps('Credentials').vmPwd.password]",
             "authenticationType": "password"
