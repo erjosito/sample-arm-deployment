@@ -21,6 +21,6 @@ VMSS cloud init file calculated dynamically as output:
 Some notes:
 
 * I have observed that a CreateUiDefinition output cannot contain a line break (`\n`), that gives a weird error (something like `[] should only contain a function`). So I am sending a special string (`__break__`) that will be substituted in the JSON template by `\n` characters.
-* To get the hostname you can use the Azure metadata endpoint: ```export hostname=$(curl -s -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2020-09-01" | jq -r '.compute.name')```
+* To get the hostname you can use the Azure metadata endpoint: ```export hostname=$(curl -s -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2020-09-01" | jq -r ".compute.name")```
 * Hence you need to install the package `jq` in advance
 * Finally, the one-line if compares the last character of the hostname and decides what to put in the file. Note the single quote comparison, this this command is run per default in `sh` and not `bash`: ```if [ "$(echo -n $hostname | tail -c 1)" = "0" ]; then echo "Hello Tom from cloudinit at $hostname" > /tmp/helloworld.txt; else echo "Hello Jerry from cloudinit at $hostname" > /tmp/helloworld.txt; fi```
