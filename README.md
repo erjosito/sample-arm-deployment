@@ -16,11 +16,13 @@ To test your CreateUiDefinition file, the best thing is using the [sandbox](http
 
 VMSS cloud init file calculated dynamically as output:
 
-```"cloudInitScript": "[concat('#cloud-config\n\nruncmd:\n- if [[ \"${HOSTNAME: -1}\" == \"0\" ]]; then echo \"Hello ', steps('InstanceNames').instance1name, ' from cloudinit at ${HOSTNAME}!\" > /tmp/helloworld.txt; else echo \"Hello ', steps('InstanceNames').instance2name, '  from cloudinit at ${HOSTNAME}!\" > /tmp/helloworld.txt; fi')]"```
+```"cloudInitScript": "[concat('#cloud-config__break____break__runcmd:__break__- apt update && apt install -y jq__break__- export hostname=$(curl -s -H Metadata:true \"http://169.254.169.254/metadata/instance?api-version=2020-09-01\" | jq -r \".compute.name\")__break__- echo $hostname > /tmp/hostname.txt__break__- export instance_id=$(echo -n $hostname | tail -c 1)__break__- echo $instance_id > /tmp/instance_id.txt__break__- if [ \"$instance_id\" = \"0\" ]; then echo \"Hello ', steps('InstanceNames').instance1name, ' from cloudinit at $hostname\" > /tmp/helloworld.txt; else echo \"Hello ', steps('InstanceNames').instance2name, ' from cloudinit at $hostname\" > /tmp/helloworld.txt; fi')]"```
 
 Some notes:
 
 * I have observed that a CreateUiDefinition output cannot contain a line break (`\n`), that gives a weird error (something like `[] should only contain a function`). So I am sending a special string (`__break__`) that will be substituted in the JSON template by `\n` characters.
 * To get the hostname you can use the Azure metadata endpoint: ```export hostname=$(curl -s -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2020-09-01" | jq -r ".compute.name")```
 * Hence you need to install the package `jq` in advance
-* Finally, the one-line if compares the last character of the hostname and decides what to put in the file. Note the single quote comparison, this this command is run per default in `sh` and not `bash`: ```if [ "$(echo -n $hostname | tail -c 1)" = "0" ]; then echo "Hello Tom from cloudinit at $hostname" > /tmp/helloworld.txt; else echo "Hello Jerry from cloudinit at $hostname" > /tmp/helloworld.txt; fi```
+* You can get the instance ID taking the last character of the hostname. I use `(echo -n $hostname | tail -c 1)` (and not something like `${hostname: -1}`) because IMHO it is compatible with more shells
+* Finally, the one-line if compares the last character of the hostname and decides what to put in the file. Note the single quote comparison, this this command is run per default in `sh` and not `bash`: ```if [ "$instance_id" = "0" ]; then echo "Hello Tom from cloudinit at $hostname" > /tmp/helloworld.txt; else echo "Hello Jerry from cloudinit at $hostname" > /tmp/helloworld.txt; fi```
+* You could probably do the script in fewer lines, but for debugging I am putting every intermediate step into a file in `/tmp/`
