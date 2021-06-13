@@ -106,7 +106,7 @@
             "adminUsername": "[steps('Credentials').adminUsername]",
             "adminPasswordOrKey": "[steps('Credentials').adminPassword]",
             "authenticationType": "password",
-            "cloudInitScript": "[concat('#cloud-config__break____break__runcmd:__break__- apt update && apt install -y jq__break__- export hostname=$(curl -s -H Metadata:true \"http://169.254.169.254/metadata/instance?api-version=2020-09-01\" | jq -r '.compute.name')__break__- echo $hostname > /tmp/hostname.txt__break__- export instance_id=$(echo -n $hostname | tail -c 1)__break__- echo $instance_id > /tmp/instance_id.txt__break__- if [ \"$instance_id\" = \"0\" ]; then echo \"Hello ', steps('InstanceNames').instance1name, ' from cloudinit at $hostname\" > /tmp/helloworld.txt; else echo \"Hello ', steps('InstanceNames').instance2name, '  from cloudinit at $hostname\" > /tmp/helloworld.txt; fi')]"
+            "cloudInitScript": "[concat('#cloud-config__break____break__runcmd:__break__- apt update && apt install -y jq__break__- export hostname=$(curl -s -H Metadata:true \"http://169.254.169.254/metadata/instance?api-version=2020-09-01\" | jq -r \".compute.name\")__break__- echo $hostname > /tmp/hostname.txt__break__- export instance_id=$(echo -n $hostname | tail -c 1)__break__- echo $instance_id > /tmp/instance_id.txt__break__- if [ \"$instance_id\" = \"0\" ]; then echo \"Hello ', steps('InstanceNames').instance1name, ' from cloudinit at $hostname\" > /tmp/helloworld.txt; else echo \"Hello ', steps('InstanceNames').instance2name, '  from cloudinit at $hostname\" > /tmp/helloworld.txt; fi')]"
             },
         "resourceTypes": []
     }
