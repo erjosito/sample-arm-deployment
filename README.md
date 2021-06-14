@@ -1,4 +1,4 @@
-# VMSS ARM deployment with distinct cloud init per instance
+# VMSS ARM deployment with distinct cloud init actions per instance
 
 ## Problem definition
 
