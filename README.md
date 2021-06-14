@@ -1,4 +1,4 @@
-# VMSS deployment with dynamically generated cloud init
+# VMSS ARM deployment with distinct cloud init per instance
 
 ## Problem definition
 
