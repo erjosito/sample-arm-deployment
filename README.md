@@ -1,4 +1,4 @@
-# Sample of an ARM deployment
+# VMSS deployment with dynamically generated cloud init
 
 ## Problem definition
 
