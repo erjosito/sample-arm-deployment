@@ -80,7 +80,7 @@
                     {
                         "name": "instance1name",
                         "type": "Microsoft.Common.TextBox",
-                        "label": "Name of instance1",
+                        "label": "Name of instance 1",
                         "defaultValue": "Tom",
                         "toolTip": "Name of instance 1",
                         "constraints": {},
@@ -90,7 +90,7 @@
                     {
                         "name": "instance2name",
                         "type": "Microsoft.Common.TextBox",
-                        "label": "Name of instance1",
+                        "label": "Name of instance 2",
                         "defaultValue": "Jerry",
                         "toolTip": "Name of instance 2",
                         "constraints": {},
